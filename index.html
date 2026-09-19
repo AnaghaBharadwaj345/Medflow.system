@@ -1,1 +1,46 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedFlow | Hospital Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">✚</div><div><strong>MedFlow</strong><span>Operations center</span></div></div>
+      <nav>
+        <a class="active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a href="#queue">☷ <span>Patient queue</span><b id="navQueue">8</b></a>
+        <a href="#resources">◈ <span>Resources</span></a>
+        <a href="#simulation">◉ <span>Simulation lab</span></a>
+      </nav>
+      <div class="sidebar-bottom"><div class="status-dot"><i></i> All systems operational</div><div class="user"><div class="avatar">AB</div><div><b>Dr. Anagha</b><small>Administrator</small></div><span>⌄</span></div></div>
+    </aside>
+    <main class="main" id="dashboard">
+      <header class="topbar"><div><p class="eyebrow">Saturday, September 19, 2026</p><h1>Good morning, Anagha <span>✦</span></h1></div><div class="top-actions"><button class="icon-btn" title="Notifications">♧<em></em></button><button class="outline-btn" id="resetBtn">↻ Reset simulation</button><button class="primary-btn" id="runBtn">▶ Run simulation</button></div></header>
+      <section class="hero"><div><span class="live-pill"><i></i> LIVE SIMULATION</span><h2>Hospital resource overview</h2><p>Real-time allocation across departments, staff and critical care.</p></div><div class="hero-meta"><span>Simulation time</span><strong id="simTime">08:00 AM</strong><small id="simDay">Day 1 · 0 min elapsed</small></div></section>
+      <section class="metrics" aria-label="Key metrics">
+        <article class="metric-card"><div class="metric-icon blue">♙</div><div><span>Patients waiting</span><strong id="waitingMetric">8</strong><small class="trend bad">↑ 12% <i>vs yesterday</i></small></div></article>
+        <article class="metric-card"><div class="metric-icon amber">◷</div><div><span>Avg. wait time</span><strong id="waitMetric">18 <small>min</small></strong><small class="trend good">↓ 8% <i>vs yesterday</i></small></div></article>
+        <article class="metric-card"><div class="metric-icon green">▣</div><div><span>Resource utilization</span><strong id="utilMetric">76<small>%</small></strong><small class="trend good">↑ 4% <i>vs yesterday</i></small></div></article>
+        <article class="metric-card"><div class="metric-icon purple">♥</div><div><span>Critical cases</span><strong id="criticalMetric">3</strong><small class="trend neutral">→ <i>stable</i></small></div></article>
+      </section>
+      <div class="dashboard-grid">
+        <section class="panel queue-panel" id="queue"><div class="panel-heading"><div><h3>Priority patient queue</h3><p>Sorted by urgency, waiting time and resource fit</p></div><button class="text-btn" id="addPatientBtn">+ Add patient</button></div><div class="table-wrap"><table><thead><tr><th>Patient</th><th>Urgency</th><th>Arrival</th><th>Needs</th><th>Wait</th><th>Assigned</th><th></th></tr></thead><tbody id="queueBody"></tbody></table></div><div class="panel-footer"><span id="queueSummary">Showing 8 of 8 patients</span><button class="text-btn">View full queue →</button></div></section>
+        <section class="panel allocation-panel" id="resources"><div class="panel-heading"><div><h3>Resource allocation</h3><p>Current capacity across the hospital</p></div><button class="more-btn">•••</button></div><div id="resourceList" class="resource-list"></div><div class="legend"><span><i class="dot used"></i> In use</span><span><i class="dot free"></i> Available</span><span><i class="dot down"></i> Offline</span></div></section>
+        <section class="panel chart-panel"><div class="panel-heading"><div><h3>Patient flow</h3><p>Arrivals and discharges over the last 8 hours</p></div><select id="chartRange"><option>Today</option><option>Yesterday</option></select></div><div class="chart"><div class="y-labels"><span>40</span><span>30</span><span>20</span><span>10</span><span>0</span></div><div class="chart-area"><div class="gridlines"><i></i><i></i><i></i><i></i><i></i></div><svg viewBox="0 0 700 190" preserveAspectRatio="none" aria-label="Patient flow chart"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4d8dff" stop-opacity=".28"/><stop offset="1" stop-color="#4d8dff" stop-opacity="0"/></linearGradient></defs><path class="area" d="M0 148 C35 135 45 92 90 110 S140 135 175 82 S220 65 265 93 S310 114 350 62 S400 52 440 73 S485 88 530 42 S580 44 615 57 S665 35 700 19 L700 190 L0 190Z"/><path class="line arrivals" d="M0 148 C35 135 45 92 90 110 S140 135 175 82 S220 65 265 93 S310 114 350 62 S400 52 440 73 S485 88 530 42 S580 44 615 57 S665 35 700 19"/><path class="line discharges" d="M0 170 C55 168 70 150 115 155 S170 145 220 153 S270 132 315 143 S365 135 410 145 S455 119 510 132 S565 111 610 121 S655 95 700 101"/></svg><div class="x-labels"><span>08:00</span><span>10:00</span><span>12:00</span><span>14:00</span><span>16:00</span></div></div></div><div class="chart-legend"><span><i class="line-key blue-key"></i> Arrivals</span><span><i class="line-key gray-key"></i> Discharges</span><b>●  12 patients/hour</b></div></section>
+        <section class="panel strategy-panel" id="simulation"><div class="panel-heading"><div><h3>Scheduling strategy</h3><p>Compare allocation approaches</p></div><span class="info">i</span></div><div class="strategy-options"><label><input type="radio" name="strategy" value="urgency" checked><span><b>Urgency first</b><small>Prioritize clinical severity</small></span></label><label><input type="radio" name="strategy" value="balanced"><span><b>Balanced (recommended)</b><small>Urgency + waiting time + fit</small></span></label><label><input type="radio" name="strategy" value="utilization"><span><b>Maximize utilization</b><small>Reduce idle resources</small></span></label></div><div class="strategy-result"><div><small>Projected avg. wait</small><strong id="projectedWait">22 min</strong></div><div><small>Throughput</small><strong id="throughput">84%</strong></div><button id="applyStrategy">Apply</button></div></section>
+      </div>
+      <section class="activity"><div class="activity-title"><h3>Recent activity</h3><button class="text-btn">View activity log →</button></div><div id="activityFeed"></div></section>
+      <footer>MedFlow Resource Management Simulator <span>•</span> Prototype v1.0 <span>•</span> Last updated just now</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
